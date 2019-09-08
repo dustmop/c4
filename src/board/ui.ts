@@ -12,6 +12,10 @@ export class Board extends BoardBase {
     this.reset()
     this.onresize()
     this.loadSounds()
+    this.shakeY = 0
+    this.shakeX = 0
+    this.shakeIndex = 0
+    this.shakeElem = null
   }
 
   onresize() {
@@ -81,6 +85,7 @@ export class Board extends BoardBase {
       await Utils.animationFrame()
       doAnimation()
     }
+    this.shakeCanvas()
   }
 
   render() {
@@ -137,5 +142,24 @@ export class Board extends BoardBase {
     await Utils.animationFrame()
     this.render()
     return true
+  }
+
+  shakeCanvas() {
+    this.shakeIndex = 1
+    this.shakeElem = document.getElementsByClassName('section-canvas')[0]
+    this.animateShaking()
+  }
+
+  animateShaking() {
+    let dampenShake = Math.pow(this.shakeIndex, 0.65)
+    this.shakeY = 10 * Math.sin(this.shakeIndex) / dampenShake
+    this.shakeX = 10 * Math.cos(this.shakeIndex) / dampenShake
+    this.shakeElem.style.marginLeft = (Math.floor(this.shakeY) + 'px')
+    this.shakeElem.style.marginTop  = (Math.floor(this.shakeX) + 'px')
+    this.shakeIndex += 1
+    if (this.shakeIndex < 35) {
+      let self = this
+      setTimeout(function() { self.animateShaking() }, 0)
+    }
   }
 }
