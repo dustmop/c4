@@ -1,5 +1,9 @@
 # Created by https://www.gitignore.io/api/node
 
+hello-world.txt
+
+.DS_Store
+
 ### Node ###
 # Logs
 logs
