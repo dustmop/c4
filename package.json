@@ -22,7 +22,7 @@
     "dist/"
   ],
   "scripts": {
-    "start": "parcel index.html",
+    "start": "parcel index.html data/**/*",
     "build": "yarn clean && parcel build index.html",
     "build:lib": "yarn clean && parcel build ./src/lib.ts",
     "prettier": "prettier --write \"src/**/*.?(ts|scss|css)\"",

@@ -11,6 +11,7 @@ export class Board extends BoardBase {
     this.initConstants()
     this.reset()
     this.onresize()
+    this.loadSounds()
   }
 
   onresize() {
@@ -48,6 +49,10 @@ export class Board extends BoardBase {
       this.canvas.style.width = Board.CANVAS_WIDTH + 'px'
       this.canvas.style.height = Board.CANVAS_HEIGHT + 'px'
     }
+  }
+
+  loadSounds() {
+    this.sound = new Audio('/data/sacha-rush-blip.wav')
   }
 
   private async animateAction(
@@ -120,6 +125,8 @@ export class Board extends BoardBase {
     if (!isColumnEverFilled) {
       row = BoardBase.ROWS - 1
     }
+
+    this.sound.play()
 
     await this.animateAction(row, column, player.boardPiece)
 
